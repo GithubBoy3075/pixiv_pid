@@ -4,9 +4,11 @@ $pid = $_GET["pid"];
 $om = $_GET["master"];
 //传入是否使用master1200的缩略图，加快访问速度（降低带宽开销）。
 
+
 if($pid == ""){
-    echo "<h1>404 NOT FOUND</h1>";
-	//没有获取到pid，返回404。
+    echo "<!DOCTYPE html><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><html><head><title>Pixiv Img Download Tool</title></head><body>";
+    echo "<h3>from: <a href=\"https://github.com/Artificialheaven/pixiv_pid.git\">pixiv_pid.git</a> ( by <a href=\"https://github.com/Artificialheaven/\">Artificialheaven</a>  )</h3><h1>pixiv_pid</h1><p>Use php to implement get pid to get pixiv images.</p><h1>Get started</h1><p>Visit http(s)://[your URL]/index.php?master=0&amp;pid=[your PID] to get the original image. (If you modify the Master entry to 1, you can get some degree of thumbnail for higher speeds. )</p><h1>Disposition</h1><p>PHP 56 or above is required. Deploy index.php on your web server and access it directly.</p><h1>Test</h1><p><a href=\"index.php?master=0&pid=97102324\">pid=97102324&master=0</a></p><p><a href=\"index.php?master=1&pid=97102324&master=1\">pid=97102324&master=1</a></p></br></br><h2><a href=\"LICENSE.txt\">LICENSE &nbsp;&nbsp;|&nbsp;&nbsp; GUN GPL v2</a></h2></body></html>";
+	//没有获取到pid。
     exit;
 };
 
@@ -31,7 +33,7 @@ $url = getSubstr($pixiv,"original\":\"","\"},");
 	header("Content-Type: ".curl_getinfo($ch, CURLINFO_CONTENT_TYPE));//获取图片类型，添加header头文件告诉浏览器这是个什么文件
 	echo($res);//输出图片
 	curl_close($ch);//释放curl
-	//exit; //退出，实际上无意义。
+	exit; //退出，实际上无意义。
 
 function getSubstr($str, $leftStr, $rightStr)
 {
